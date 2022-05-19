@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWT.Entities", "JWT.Entities\JWT.Entities.csproj", "{AA989992-C300-4F28-88E0-5EC528E9F791}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWT.DataAccess", "JWT.DataAccess\JWT.DataAccess.csproj", "{F60DC739-39DD-47AE-906B-95E0E850AFAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AA989992-C300-4F28-88E0-5EC528E9F791}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA989992-C300-4F28-88E0-5EC528E9F791}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA989992-C300-4F28-88E0-5EC528E9F791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F60DC739-39DD-47AE-906B-95E0E850AFAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F60DC739-39DD-47AE-906B-95E0E850AFAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F60DC739-39DD-47AE-906B-95E0E850AFAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F60DC739-39DD-47AE-906B-95E0E850AFAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

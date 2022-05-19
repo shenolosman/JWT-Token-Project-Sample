@@ -1,6 +1,8 @@
-﻿namespace JWT.Entities.Concrete
+﻿using JWT.Entities.Interfaces;
+
+namespace JWT.Entities.Concrete
 {
-    public class AppUserRole
+    public class AppUserRole : ITable
     {
         public int Id { get; set; }
 
