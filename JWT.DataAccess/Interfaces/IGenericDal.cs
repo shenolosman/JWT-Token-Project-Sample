@@ -5,12 +5,12 @@ namespace JWT.DataAccess.Interfaces
 {
     public interface IGenericDal<TEntity> where TEntity : class, ITable, new()
     {
-        Task<List<TEntity>> GetAllAsync();
-        Task<List<TEntity>> GetAllAsyncByFilter(Expression<Func<TEntity, bool>> filter);
-        Task<TEntity> GetByIdAsync(int id);
-        Task<TEntity> GetAsyncByFilter(Expression<Func<TEntity, bool>> filter);
-        Task DeleteAync(TEntity entity);
-        Task UpdateAsync(TEntity entity);
-        Task AddAsync(TEntity entity);
+        Task<List<TEntity>> GetAll();
+        Task<List<TEntity>> GetAllByFilter(Expression<Func<TEntity, bool>> filter);
+        Task<TEntity> GetById(int id);
+        Task<TEntity> GetByFilter(Expression<Func<TEntity, bool>> filter);
+        Task Delete(TEntity entity);
+        Task Update(TEntity entity);
+        Task Add(TEntity entity);
     }
 }

@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Concrete\Dapper\" />
-    <Folder Include="Concrete\EntityFrameworkCore\Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
