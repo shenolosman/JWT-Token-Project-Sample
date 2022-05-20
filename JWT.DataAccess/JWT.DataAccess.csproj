@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Concrete\Dapper\" />
+    <Folder Include="Concrete\EntityFrameworkCore\Repositories\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
 
