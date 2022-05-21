@@ -24,10 +24,11 @@ namespace JWT.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [ServiceFilter(typeof(ValidId<Product>))]
         public async Task<IActionResult> GetById(int id)
         {
             var product = await _productService.GetById(id);
-            if (product == null) return NotFound();
+            //if (product == null) return NotFound();
             return Ok(product);
         }
         [ValidModel] //no need to write modelstate inside method
@@ -39,6 +40,7 @@ namespace JWT.WebApi.Controllers
         }
 
         [HttpPut]
+        [ServiceFilter(typeof(ValidId<Product>))]
         public async Task<IActionResult> Update(Product product)
         {
             await _productService.Update(product);
