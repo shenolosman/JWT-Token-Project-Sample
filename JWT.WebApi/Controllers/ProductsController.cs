@@ -1,6 +1,7 @@
 ﻿using JWT.Business.Interfaces;
 using JWT.Entities.Concrete;
 using JWT.Entities.Dtos.ProductDtos;
+using JWT.WebApi.CustomFilters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JWT.WebApi.Controllers
@@ -29,11 +30,10 @@ namespace JWT.WebApi.Controllers
             if (product == null) return NotFound();
             return Ok(product);
         }
-
+        [ValidModel] //no need to write modelstate inside method
         [HttpPost]
         public async Task<IActionResult> Add(ProductAddDto product)
         {
-            if (!ModelState.IsValid) return BadRequest();
             await _productService.Add(new Product { Name = product.Name });
             return Created("", product);
         }
