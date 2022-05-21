@@ -4,6 +4,7 @@ using JWT.Business.Interfaces;
 using JWT.Business.ValidationRules.FluentValidation;
 using JWT.DataAccess.Concrete.EntityFrameworkCore.Repositories;
 using JWT.DataAccess.Interfaces;
+using JWT.Entities.Dtos.AppUserDtos;
 using JWT.Entities.Dtos.ProductDtos;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -33,6 +34,7 @@ namespace JWT.Business.DependenciesContainers.MicrosoftIoc
 
             services.AddTransient<IValidator<ProductAddDto>, ProductAddDtoValidator>();
             services.AddTransient<IValidator<ProductUpdateDto>, ProductUpdateDtoValidator>();
+            services.AddTransient<IValidator<AppUserLoginDto>, AppUserLoginDtoValidator>();
 
             return services;
         }
