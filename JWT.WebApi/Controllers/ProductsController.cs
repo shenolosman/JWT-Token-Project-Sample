@@ -22,7 +22,7 @@ namespace JWT.WebApi.Controllers
             return Ok(products);
         }
 
-        [HttpGet("{id")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var product = await _productService.GetById(id);
@@ -45,7 +45,7 @@ namespace JWT.WebApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Product product)
         {
             await _productService.Delete(product);

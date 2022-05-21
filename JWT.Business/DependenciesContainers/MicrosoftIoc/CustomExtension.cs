@@ -11,7 +11,7 @@ namespace JWT.Business.DependenciesContainers.MicrosoftIoc
 {
     public static class CustomExtension
     {
-        public static void AddDependencies(this IServiceCollection services)
+        public static IServiceCollection AddDependencies(this IServiceCollection services)
         {
             services.AddScoped(typeof(IGenericService<>), typeof(GenericManager<>));
             services.AddScoped(typeof(IGenericDal<>), typeof(EfGenericRepository<>));
@@ -30,6 +30,8 @@ namespace JWT.Business.DependenciesContainers.MicrosoftIoc
 
 
             services.AddTransient<IValidator<ProductAddDto>, ProductAddDtoValidator>();
+
+            return services;
         }
     }
 }
