@@ -1,5 +1,6 @@
 ﻿using JWT.Business.Interfaces;
 using JWT.Entities.Concrete;
+using JWT.Entities.Dtos.ProductDtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JWT.WebApi.Controllers
@@ -30,9 +31,10 @@ namespace JWT.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Product product)
+        public async Task<IActionResult> Add(ProductAddDto product)
         {
-            await _productService.Add(product);
+            if (!ModelState.IsValid) return BadRequest();
+            await _productService.Add(new Product { Name = product.Name });
             return Created("", product);
         }
 

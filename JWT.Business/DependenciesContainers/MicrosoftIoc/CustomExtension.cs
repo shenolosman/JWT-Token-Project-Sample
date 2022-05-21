@@ -1,7 +1,10 @@
-﻿using JWT.Business.Concrete;
+﻿using FluentValidation;
+using JWT.Business.Concrete;
 using JWT.Business.Interfaces;
+using JWT.Business.ValidationRules.FluentValidation;
 using JWT.DataAccess.Concrete.EntityFrameworkCore.Repositories;
 using JWT.DataAccess.Interfaces;
+using JWT.Entities.Dtos.ProductDtos;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JWT.Business.DependenciesContainers.MicrosoftIoc
@@ -25,6 +28,8 @@ namespace JWT.Business.DependenciesContainers.MicrosoftIoc
             services.AddScoped<IAppUserDal, EfAppUserRepository>();
             services.AddScoped<IAppUserService, AppUserManager>();
 
+
+            services.AddTransient<IValidator<ProductAddDto>, ProductAddDtoValidator>();
         }
     }
 }
