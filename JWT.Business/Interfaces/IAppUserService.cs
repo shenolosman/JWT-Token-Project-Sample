@@ -7,5 +7,7 @@ namespace JWT.Business.Interfaces
     {
         Task<AppUser> FindByUserName(string userName);
         Task<bool> CheckPassword(AppUserLoginDto model);
+        Task<List<AppRole>> GetRolesByUserName(string userName);
+
     }
 }

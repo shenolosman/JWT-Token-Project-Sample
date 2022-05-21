@@ -24,5 +24,10 @@ namespace JWT.Business.Concrete
             var appUser = await _appUserDal.GetByFilter(x => x.UserName == model.UserName);
             return appUser.Password == model.Password ? true : false;
         }
+
+        public async Task<List<AppRole>> GetRolesByUserName(string userName)
+        {
+            return await _appUserDal.GetRolesByUserName(userName);
+        }
     }
 }

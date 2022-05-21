@@ -30,6 +30,10 @@ namespace JWT.Business.Concrete
             claims.Add(new Claim(ClaimTypes.Name, appUser.UserName));
             claims.Add(new Claim(ClaimTypes.NameIdentifier, appUser.Id.ToString()));
 
+            if (roles == null)
+            {
+                return null;
+            }
             if (roles.Count > 0)
             {
                 foreach (var role in roles)

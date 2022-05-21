@@ -25,7 +25,11 @@ namespace JWT.WebApi.Controllers
             if (appUser == null) return BadRequest("Username or Password is wrong!");
             if (!await _appUserService.CheckPassword(model)) return BadRequest("Username or Password is wrong!");
 
-            var token = _jwtService.GenerateJwtToken(appUser, null);
+            var roles = await _appUserService.GetRolesByUserName(model.UserName);
+            if (roles == null) return BadRequest("User roles are empty!");
+
+            var token = _jwtService.GenerateJwtToken(appUser, roles);
+
             return Created("", token);
         }
     }
