@@ -14,10 +14,10 @@ namespace JWT.WebApi.Controllers
             this._productService = productService;
         }
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            _productService.GetAll();
-            return Ok();
+            var products = await _productService.GetAll();
+            return Ok(products);
         }
     }
 }
