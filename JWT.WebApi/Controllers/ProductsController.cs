@@ -1,4 +1,5 @@
-﻿using JWT.Business.Interfaces;
+﻿using AutoMapper;
+using JWT.Business.Interfaces;
 using JWT.Entities.Concrete;
 using JWT.Entities.Dtos.ProductDtos;
 using JWT.WebApi.CustomFilters;
@@ -11,10 +12,12 @@ namespace JWT.WebApi.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, IMapper mapper)
         {
             this._productService = productService;
+            _mapper = mapper;
         }
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -35,19 +38,19 @@ namespace JWT.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(ProductAddDto product)
         {
-            await _productService.Add(new Product { Name = product.Name });
+            await _productService.Add(_mapper.Map<Product>(product));
             return Created("", product);
         }
-
         [HttpPut]
-        [ServiceFilter(typeof(ValidId<Product>))]
-        public async Task<IActionResult> Update(Product product)
+        [ValidModel]
+        public async Task<IActionResult> Update(ProductUpdateDto product)
         {
-            await _productService.Update(product);
+            await _productService.Update(_mapper.Map<Product>(product));
             return NoContent();
         }
 
         [HttpDelete("{id}")]
+        [ServiceFilter(typeof(ValidId<Product>))]
         public async Task<IActionResult> Delete(Product product)
         {
             await _productService.Delete(product);
