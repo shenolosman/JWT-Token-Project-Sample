@@ -28,6 +28,8 @@ namespace JWT.Business.DependenciesContainers.MicrosoftIoc
             services.AddScoped<IAppUserDal, EfAppUserRepository>();
             services.AddScoped<IAppUserService, AppUserManager>();
 
+            services.AddScoped<IJwtService, JwtManager>();
+
 
             services.AddTransient<IValidator<ProductAddDto>, ProductAddDtoValidator>();
             services.AddTransient<IValidator<ProductUpdateDto>, ProductUpdateDtoValidator>();
