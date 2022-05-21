@@ -3,6 +3,7 @@ using JWT.Business.Interfaces;
 using JWT.Entities.Concrete;
 using JWT.Entities.Dtos.ProductDtos;
 using JWT.WebApi.CustomFilters;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JWT.WebApi.Controllers
@@ -16,7 +17,7 @@ namespace JWT.WebApi.Controllers
 
         public ProductsController(IProductService productService, IMapper mapper)
         {
-            this._productService = productService;
+            _productService = productService;
             _mapper = mapper;
         }
         [HttpGet]
@@ -55,6 +56,14 @@ namespace JWT.WebApi.Controllers
         {
             await _productService.Delete(product);
             return NoContent();
+        }
+        [HttpGet]
+        [Route("/error")]
+        public IActionResult Error()
+        {
+            var errorInfo = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+            return Problem(detail: "One or more error occurred, will be fixed soon", errorInfo?.Error.Message);
         }
     }
 }

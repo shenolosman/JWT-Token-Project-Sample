@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using JWT.Business.DependenciesContainers.MicrosoftIoc;
 using JWT.WebApi.CustomFilters;
+using JWT.WebApi.Mapping.AutoMapperProfile;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,9 @@ builder.Services.AddControllers().AddFluentValidation();
 
 builder.Services.AddDependencies();
 builder.Services.AddScoped(typeof(ValidId<>));
+
+builder.Services.AddAutoMapper(typeof(MapProfile));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -22,6 +26,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseExceptionHandler("/Error");
 
 app.UseAuthorization();
 

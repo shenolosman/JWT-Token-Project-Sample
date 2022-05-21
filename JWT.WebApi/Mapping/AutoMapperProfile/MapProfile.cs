@@ -8,11 +8,12 @@ namespace JWT.WebApi.Mapping.AutoMapperProfile
     {
         public MapProfile()
         {
-            CreateMap<Product, ProductAddDto>();
             CreateMap<ProductAddDto, Product>();
+            CreateMap<Product, ProductAddDto>();
 
-            CreateMap<Product, ProductUpdateDto>();
             CreateMap<ProductUpdateDto, Product>();
+            CreateMap<Product, ProductUpdateDto>();
+
         }
     }
 }
