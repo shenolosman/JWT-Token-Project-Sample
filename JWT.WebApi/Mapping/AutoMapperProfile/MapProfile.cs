@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JWT.Entities.Concrete;
+using JWT.Entities.Dtos.AppUserDtos;
 using JWT.Entities.Dtos.ProductDtos;
 
 namespace JWT.WebApi.Mapping.AutoMapperProfile
@@ -14,6 +15,9 @@ namespace JWT.WebApi.Mapping.AutoMapperProfile
             CreateMap<ProductUpdateDto, Product>();
             CreateMap<Product, ProductUpdateDto>();
 
+
+            CreateMap<AppUserAddDto, AppUser>();
+            CreateMap<AppUser, AppUserAddDto>();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using JWT.Business.Interfaces;
+﻿using AutoMapper;
+using JWT.Business.Interfaces;
+using JWT.Entities.Concrete;
 using JWT.Entities.Dtos.AppUserDtos;
 using JWT.WebApi.CustomFilters;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +13,13 @@ namespace JWT.WebApi.Controllers
     {
         private readonly IJwtService _jwtService;
         private readonly IAppUserService _appUserService;
+        private readonly IMapper _mapper;
 
-        public AuthController(IJwtService jwtService, IAppUserService appUserService)
+        public AuthController(IJwtService jwtService, IAppUserService appUserService, IMapper mapper)
         {
             _jwtService = jwtService;
             _appUserService = appUserService;
+            _mapper = mapper;
         }
         [HttpGet("[action]")]
         [ValidModel]
@@ -32,5 +36,17 @@ namespace JWT.WebApi.Controllers
 
             return Created("", token);
         }
+        [HttpPost("[action]")]
+        [ValidModel]
+        public async Task<IActionResult> Register(AppUserAddDto model)
+        {
+            var user = await _appUserService.FindByUserName(model.UserName);
+            if (user != null) return BadRequest($"{user.UserName} is already taken!");
+
+            await _appUserService.Add(_mapper.Map<AppUser>(model));
+
+            return Created("", model);
+        }
+
     }
 }

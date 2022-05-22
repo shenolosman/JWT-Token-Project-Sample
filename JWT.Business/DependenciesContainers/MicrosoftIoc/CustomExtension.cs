@@ -35,6 +35,7 @@ namespace JWT.Business.DependenciesContainers.MicrosoftIoc
             services.AddTransient<IValidator<ProductAddDto>, ProductAddDtoValidator>();
             services.AddTransient<IValidator<ProductUpdateDto>, ProductUpdateDtoValidator>();
             services.AddTransient<IValidator<AppUserLoginDto>, AppUserLoginDtoValidator>();
+            services.AddTransient<IValidator<AppUserAddDto>, AppUserAddDtoValidator>();
 
             return services;
         }
