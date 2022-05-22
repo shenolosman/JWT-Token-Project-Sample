@@ -1,6 +1,8 @@
 using FluentValidation.AspNetCore;
 using JWT.Business.DependenciesContainers.MicrosoftIoc;
+using JWT.Business.Interfaces;
 using JWT.Business.StringInfos;
+using JWT.WebApi;
 using JWT.WebApi.CustomFilters;
 using JWT.WebApi.Mapping.AutoMapperProfile;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -47,5 +49,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var appUserService = scope.ServiceProvider.GetRequiredService<IAppUserService>();
+    var appUserRoleService = scope.ServiceProvider.GetRequiredService<IAppUserRoleService>();
+    var appRoleService = scope.ServiceProvider.GetRequiredService<IAppRoleService>();
+
+    JwtIdentityInitializer.Seed(appUserService, appUserRoleService, appRoleService).Wait();
+}
 
 app.Run();
