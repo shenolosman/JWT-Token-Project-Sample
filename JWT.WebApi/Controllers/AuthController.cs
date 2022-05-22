@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JWT.Business.Interfaces;
+using JWT.Business.StringInfos;
 using JWT.Entities.Concrete;
 using JWT.Entities.Dtos.AppUserDtos;
 using JWT.WebApi.CustomFilters;
@@ -38,12 +39,21 @@ namespace JWT.WebApi.Controllers
         }
         [HttpPost("[action]")]
         [ValidModel]
-        public async Task<IActionResult> Register(AppUserAddDto model)
+        public async Task<IActionResult> Register(AppUserAddDto model, [FromServices] IAppUserRoleService appUserRoleService, [FromServices] IAppRoleService appRoleService)
         {
             var user = await _appUserService.FindByUserName(model.UserName);
             if (user != null) return BadRequest($"{user.UserName} is already taken!");
 
             await _appUserService.Add(_mapper.Map<AppUser>(model));
+
+            var createdUser = await _appUserService.FindByUserName(model.UserName);
+            var role = await appRoleService.FindByName(RoleInfo.Member);
+
+            await appUserRoleService.Add(new AppUserRole
+            {
+                AppRoleId = role.Id,
+                AppUserId = createdUser.Id
+            });
 
             return Created("", model);
         }
