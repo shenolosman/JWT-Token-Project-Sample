@@ -22,7 +22,7 @@ namespace JWT.WebApi.Controllers
             _appUserService = appUserService;
             _mapper = mapper;
         }
-        [HttpGet("[action]")]
+        [HttpPost("[action]")]
         [ValidModel]
         public async Task<IActionResult> Signin(AppUserLoginDto model)
         {
