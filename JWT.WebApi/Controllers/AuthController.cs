@@ -3,6 +3,7 @@ using JWT.Business.Interfaces;
 using JWT.Business.StringInfos;
 using JWT.Entities.Concrete;
 using JWT.Entities.Dtos.AppUserDtos;
+using JWT.Entities.Token;
 using JWT.WebApi.CustomFilters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +37,12 @@ namespace JWT.WebApi.Controllers
 
             var token = _jwtService.GenerateJwtToken(appUser, roles);
 
-            return Created("", token);
+            var jwtToken = new JwtAccessToken
+            {
+                Token = token
+            };
+
+            return Created("", jwtToken);
         }
         [HttpPost("[action]")]
         [ValidModel]
