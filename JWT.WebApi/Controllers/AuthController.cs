@@ -4,6 +4,7 @@ using JWT.Business.StringInfos;
 using JWT.Entities.Concrete;
 using JWT.Entities.Dtos.AppUserDtos;
 using JWT.WebApi.CustomFilters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JWT.WebApi.Controllers
@@ -58,5 +59,19 @@ namespace JWT.WebApi.Controllers
             return Created("", model);
         }
 
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> ActiveUser()
+        {
+            var user = await _appUserService.FindByUserName(User.Identity.Name);
+            var roles = await _appUserService.GetRolesByUserName(User.Identity.Name);
+            var userDto = new AppUserDto()
+            {
+                FullName = user.FullName,
+                UserName = user.UserName,
+                AppUserRoles = roles.Select(x => x.Name).ToList()
+            };
+            return Ok(userDto);
+        }
     }
 }
